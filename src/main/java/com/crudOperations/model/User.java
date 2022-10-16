@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -22,6 +21,4 @@ public class User {
     private String name;
     @Column(name = "job")
     private String job;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }
