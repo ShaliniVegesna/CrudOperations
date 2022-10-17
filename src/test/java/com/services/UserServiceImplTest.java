@@ -1,6 +1,5 @@
 package com.services;
 
-import com.crudOperations.dto.CreateUserDto;
 import com.crudOperations.model.User;
 import com.crudOperations.repository.UserRepository;
 import com.crudOperations.service.UserServiceImpl;
@@ -13,8 +12,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
-
-import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
