@@ -1,10 +1,12 @@
 package com.crudOperations.service;
 
+import com.crudOperations.dto.CreateUserDto;
+import com.crudOperations.dto.UpdateUserDto;
 import com.crudOperations.model.User;
 
 public interface UserService {
-    User create(User user);
-    User update(Long id, User user);
-    User partialUpdate(Long id, User user);
+    CreateUserDto create(User user);
+    UpdateUserDto update(Long id, User user);
+    UpdateUserDto partialUpdate(Long id, User user);
     void delete(Long id);
 }

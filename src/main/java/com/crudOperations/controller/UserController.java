@@ -7,47 +7,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 public class UserController {
     @Autowired
     UserService userService;
     @PostMapping("/users")
-    public ResponseEntity<Object> create(@RequestBody User user) {
-          userService.create(user);
-          Map<String, Object> responseMap = new HashMap<>();
-          responseMap.put("name", user.getName());
-          responseMap.put("job", user.getJob());
-          responseMap.put("id",user.getId());
-          responseMap.put("createdAt", LocalDateTime.now());
-          return new ResponseEntity<>(responseMap,HttpStatus.OK);
+    public ResponseEntity<?> create(@RequestBody User user) {
+          return new ResponseEntity<>(userService.create(user),HttpStatus.OK);
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody User user) {
-        userService.update(id,user);
-        Map<String, Object> responseMap = new HashMap<>();
-        responseMap.put("name", user.getName());
-        responseMap.put("job", user.getJob());
-        responseMap.put("updatedAt",LocalDateTime.now());
-        return new ResponseEntity<>(responseMap,HttpStatus.OK);
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody User user) {
+        return new ResponseEntity<>(userService.update(id,user),HttpStatus.OK);
     }
 
     @PatchMapping("/users/{id}")
-    public ResponseEntity<Object> partialUpdate(@PathVariable Long id,@RequestBody User user) {
-        userService.partialUpdate(id,user);
-        Map<String, Object> responseMap = new HashMap<>();
-        responseMap.put("name", user.getName());
-        responseMap.put("job", user.getJob());
-        responseMap.put("updatedAt",LocalDateTime.now());
-        return new ResponseEntity<>(responseMap,HttpStatus.OK);
+    public ResponseEntity<?> partialUpdate(@PathVariable Long id,@RequestBody User user) {
+        return new ResponseEntity<>(userService.partialUpdate(id,user),HttpStatus.OK);
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<Object> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

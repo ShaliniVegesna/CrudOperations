@@ -21,4 +21,8 @@ public class User {
     private String name;
     @Column(name = "job")
     private String job;
+    @Column(name="createdAt")
+    private LocalDateTime createdAt;
+    @Column(name="updatedAt")
+    private LocalDateTime updatedAt;
 }
