@@ -56,6 +56,7 @@ public class UserServiceImplTest {
         updatedUser.setName("morpheus");
         updatedUser.setJob("leader");
         updatedUser.setCreatedAt(updatedDate);
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
         when(userRepository.save(user)).thenReturn(user);
         Assertions.assertEquals(userService.update(user.getId(),user).getName(),"morpheus");
         Assertions.assertEquals(userService.update(user.getId(),user).getJob(),"zion resident");
@@ -73,6 +74,7 @@ public class UserServiceImplTest {
         updatedUser.setName("morpheus");
         updatedUser.setJob("leader");
         updatedUser.setCreatedAt(updatedDate);
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
         when(userRepository.save(user)).thenReturn(user);
         Assertions.assertEquals(userService.partialUpdate(user.getId(),user).getName(),"morpheus");
         Assertions.assertEquals(userService.partialUpdate(user.getId(),user).getJob(),"zion");

@@ -2,6 +2,7 @@ package com.crudOperations.service;
 
 import com.crudOperations.dto.CreateUserDto;
 import com.crudOperations.dto.UpdateUserDto;
+import com.crudOperations.exception.UserNotFoundException;
 import com.crudOperations.model.User;
 import com.crudOperations.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UpdateUserDto update(Long id, User user) {
+        userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException());
         user.setUpdatedAt(LocalDateTime.now());
         userRepository.save(user);
         return new UpdateUserDto(user.getName(),user.getJob(),user.getUpdatedAt());
@@ -29,6 +32,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UpdateUserDto partialUpdate(Long id, User user) {
+        userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException());
         user.setUpdatedAt(LocalDateTime.now());
         userRepository.save(user);
         return new UpdateUserDto(user.getName(),user.getJob(),user.getUpdatedAt());
@@ -37,7 +42,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void delete(Long id) {
         userRepository.findById(id)
-                .orElse(new User());
+                .orElseThrow(() -> new UserNotFoundException());
         userRepository.deleteById(id);
     }
 }
