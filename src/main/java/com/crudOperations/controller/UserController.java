@@ -1,6 +1,5 @@
 package com.crudOperations.controller;
 
-import com.crudOperations.exception.UserAlreadyExistsException;
 import com.crudOperations.exception.UserNotFoundException;
 import com.crudOperations.model.User;
 import com.crudOperations.service.UserService;
@@ -14,7 +13,7 @@ public class UserController {
     @Autowired
     UserService userService;
     @PostMapping("/users")
-    public ResponseEntity<?> create(@RequestBody User user) throws UserAlreadyExistsException {
+    public ResponseEntity<?> create(@RequestBody User user) {
           return new ResponseEntity<>(userService.create(user),HttpStatus.OK);
     }
 

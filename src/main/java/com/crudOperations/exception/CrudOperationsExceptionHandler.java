@@ -8,11 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CrudOperationsExceptionHandler {
     @ExceptionHandler
-    public ResponseEntity handleBookAlreadyExistsException(UserAlreadyExistsException userAlreadyExistsException) {
-        return new ResponseEntity("User already exists", HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler
     public ResponseEntity handleBookNotFoundException(UserNotFoundException userNotFoundException) {
         return new ResponseEntity("User not found", HttpStatus.NOT_FOUND);
     }
