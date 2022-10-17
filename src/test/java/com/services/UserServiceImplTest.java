@@ -12,6 +12,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
@@ -34,7 +38,7 @@ public class UserServiceImplTest {
         createdUser.setName("morpheus");
         createdUser.setJob("leader");
         createdUser.setCreatedAt(createdDate);
-        Mockito.when(userRepository.save(user)).thenReturn(createdUser);
+        when(userRepository.save(user)).thenReturn(createdUser);
         Assertions.assertEquals(userService.create(user).getId(),1L);
         Assertions.assertEquals(userService.create(user).getName(),"morpheus");
         Assertions.assertEquals(userService.create(user).getJob(),"leader");
@@ -52,7 +56,7 @@ public class UserServiceImplTest {
         updatedUser.setName("morpheus");
         updatedUser.setJob("leader");
         updatedUser.setCreatedAt(updatedDate);
-        Mockito.when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.save(user)).thenReturn(user);
         Assertions.assertEquals(userService.update(user.getId(),user).getName(),"morpheus");
         Assertions.assertEquals(userService.update(user.getId(),user).getJob(),"zion resident");
         Assertions.assertEquals(userService.update(user.getId(),user).getUpdatedAt().toLocalDate(),updatedDate.toLocalDate());
@@ -69,9 +73,19 @@ public class UserServiceImplTest {
         updatedUser.setName("morpheus");
         updatedUser.setJob("leader");
         updatedUser.setCreatedAt(updatedDate);
-        Mockito.when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.save(user)).thenReturn(user);
         Assertions.assertEquals(userService.partialUpdate(user.getId(),user).getName(),"morpheus");
         Assertions.assertEquals(userService.partialUpdate(user.getId(),user).getJob(),"zion");
         Assertions.assertEquals(userService.partialUpdate(user.getId(),user).getUpdatedAt().toLocalDate(),updatedDate.toLocalDate());
+    }
+    @Test
+    public void testDelete(){
+        User user =new User();
+        user.setId(1L);
+        user.setName("morpheus");
+        user.setJob("zion");
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        userService.delete(user.getId());
+        verify(userRepository).deleteById(user.getId());
     }
 }
