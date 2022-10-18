@@ -1,2 +1,2 @@
-INSERT INTO USERS(name, job, id)VALUES
-("Shalini","Software Engineer","1")
+INSERT INTO USERS(name, job, id,created_at,updated_at)VALUES
+("Shalini","Software Engineer","1",,)

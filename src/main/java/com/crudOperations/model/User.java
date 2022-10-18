@@ -21,8 +21,8 @@ public class User {
     private String name;
     @Column(name = "job")
     private String job;
-    @Column(name="createdAt")
+    @Column(name="created_at")
     private LocalDateTime createdAt;
-    @Column(name="updatedAt")
+    @Column(name="update_at")
     private LocalDateTime updatedAt;
 }
